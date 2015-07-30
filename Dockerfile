@@ -26,5 +26,7 @@ RUN sudo make install
 RUN echo /usr/local/lib >> /etc/ld.so.conf
 RUN ldconfig
 
+RUN pip install pyshp
+
 RUN conda install -c scitools cartopy
 RUN conda install -c scitools iris
