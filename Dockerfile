@@ -14,3 +14,5 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
 ENV PATH /opt/conda/bin:$PATH
 
 RUN conda install -c scitools iris cartopy
+
+RUN echo $LD_LIBRARY_PATH
