@@ -13,6 +13,18 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
 
 ENV PATH /opt/conda/bin:$PATH
 
-RUN conda install -c scitools iris cartopy
+RUN wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz
+RUN wget http://download.osgeo.org/proj/proj-datumgrid-1.5.tar.gz
 
-RUN echo $LD_LIBRARY_PATH
+RUN tar xzf proj-4.8.0.tar.gz
+RUN tar xzf proj-datumgrid-1.5.tar.gz
+
+RUN proj-4.8.0/configure
+RUN make
+RUN sudo make install
+
+RUN echo /usr/local/lib >> /etc/ld.so.conf
+RUN ldconfig
+
+RUN conda install -c scitools cartopy
+RUN conda install -c scitools iris
